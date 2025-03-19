@@ -1,0 +1,15 @@
+*.log
+*.*~
+*.h5
+
+# IDE
+.idea
+.vscode
+
+# Compiled python
+*.pyc
+
+.ycm_extra_conf.py
+.ipynb_checkpoints
+
+/*build*/
