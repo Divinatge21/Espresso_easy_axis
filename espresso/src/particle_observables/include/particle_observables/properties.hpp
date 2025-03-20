@@ -78,6 +78,14 @@ struct DipoleMoment {
     return particle_traits.dipole_moment(p);
   }
 };
+
+struct EasyAxisDirection {
+  template <class Particle, class Traits = default_traits<Particle>>
+  decltype(auto) operator()(Particle const &p,
+                            Traits particle_traits = {}) const {
+    return particle_traits.easy_axis(p);
+  }
+};
 } // namespace ParticleObservables
 
 #endif // OBSERVABLES_PROPERTIES_HPP

@@ -203,6 +203,19 @@ class DipoleMoment(Observable):
 
 
 @script_interface_register
+class EasyAxisDirection(Observable):
+
+    """Calculates the directin of easy axis  for particles with given ids.
+
+    Parameters
+    ----------
+    ids : array_like of :obj:`int`
+          The ids of (existing) particles to take into account.
+
+    """
+    _so_name = "Observables::EasyAxisDirection"
+
+@script_interface_register
 class FluxDensityProfile(ProfileObservable):
 
     """Calculates the particle flux density for particles with given ids.

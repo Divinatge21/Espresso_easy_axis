@@ -45,6 +45,7 @@ cdef extern from "Particle.hpp":
 
     ctypedef struct particle "Particle":
         Vector3d calc_dip()
+        Vector3d calc_easy_axis()
         int type()
         int id()
         double mass()
@@ -63,6 +64,7 @@ cdef extern from "Particle.hpp":
         Vector3d torque()
         Quaternion[double] quat()
         double dipm()
+        double sigma_m()
         bint is_virtual()
         Vector3d ext_force()
         Vector3d ext_torque()
@@ -108,6 +110,10 @@ cdef extern from "particle_data.hpp":
     IF DIPOLES:
         void set_particle_dip(int part, const Vector3d & dip)
         void set_particle_dipm(int part, double dipm)
+
+        void set_particle_easy_axis(int part, const Vector3d & easy_axis)
+        void set_particle_sigma_m(int part, double sigma_m)
+
 
     IF VIRTUAL_SITES:
         void set_particle_virtual(int part, int isVirtual)

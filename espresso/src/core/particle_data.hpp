@@ -168,6 +168,18 @@ void set_particle_dip(int part, Utils::Vector3d const &dip);
  *  @param dipm its new dipole moment.
  */
 void set_particle_dipm(int part, double dipm);
+
+/** Call only on the head node: set particle easy_axis orientation.
+ *  @param part the particle.
+ *  @param easy_axis its new easu_axis orientation.
+ */
+void set_particle_easy_axis(int part, Utils::Vector3d const &easy_axis);
+
+/** Call only on the head node: set particle parametr magnetic anisotropy (absolute value).
+ *  @param part the particle.
+ *  @param sigma_m its new parrrametr magnetic anisotropy.
+ */
+void set_particle_sigma_m(int part, double sigma_m);
 #endif
 
 #ifdef VIRTUAL_SITES

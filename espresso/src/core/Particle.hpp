@@ -148,7 +148,15 @@ struct ParticleProperties {
 
 #ifdef DIPOLES
   /** dipole moment (absolute value) */
+  
+  /** dipole moment. This is synchronized with quatu and quat aw well as with LLG equation. */
+  Utils::Vector3d dip = {0., 0., 0.};
+
+  /** easy axis dirertion. This is synchronized with quatu and quat. */
+  Utils::Vector3d easy_axis = {0., 0., 0.};
+  
   double dipm = 0.;
+  double sigma_m = 0.;
 #endif
 
 #ifdef VIRTUAL_SITES_RELATIVE
@@ -228,6 +236,7 @@ struct ParticleProperties {
 #endif
 #ifdef DIPOLES
     ar &dipm;
+    ar &sigma_m;
 #endif
 
 #ifdef VIRTUAL_SITES
@@ -502,6 +511,10 @@ public:
   auto const &dipm() const { return p.dipm; }
   auto &dipm() { return p.dipm; }
   auto calc_dip() const { return calc_director() * dipm(); }
+
+  auto const &sigma_m() const { return p.sigma_m; }
+  auto &sigma_m() { return p.sigma_m; }
+  auto calc_easy_axis() const { return calc_director(); }
 #endif
 #ifdef ROTATIONAL_INERTIA
   auto const &rinertia() const { return p.rinertia; }

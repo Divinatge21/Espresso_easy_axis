@@ -38,4 +38,7 @@ BOOST_AUTO_TEST_CASE(properties_) {
   BOOST_CHECK_EQUAL(Charge{}(p), traits<Testing::Particle>{}.charge(p));
   BOOST_CHECK_EQUAL(DipoleMoment{}(p),
                     traits<Testing::Particle>{}.dipole_moment(p));
+
+  BOOST_CHECK_EQUAL(EasyAxisDirection{}(p),
+                    traits<Testing::Particle>{}.easy_axis(p));
 }

@@ -111,7 +111,27 @@ auto convert_body_to_space(const Particle &p, const Utils::Matrix<T, 3, 3> &A) {
 inline std::pair<Utils::Quaternion<double>, double>
 convert_dip_to_quat(const Utils::Vector3d &dip) {
   auto quat = Utils::convert_director_to_quaternion(dip);
+
+ 
+  fprintf(stderr, "Dip_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+    quat[0], quat[1], quat[2], quat[3]);
+    
+    
+
   return {quat, dip.norm()};
+}
+
+inline std::pair<Utils::Quaternion<double>, double>
+convert_easy_axis_to_quat(const Utils::Vector3d &easy_axis) {
+    auto quat = Utils::convert_director_to_quaternion(easy_axis);
+
+      // Вывод значения кватерниона
+      fprintf(stderr, "EasyAxis_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+        quat[0], quat[1], quat[2], quat[3]);
+     
+
+
+  return {quat, easy_axis.norm()};
 }
 
 #endif
