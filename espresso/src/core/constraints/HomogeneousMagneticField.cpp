@@ -28,7 +28,7 @@ namespace Constraints {
 
 ParticleForce HomogeneousMagneticField::force(const Particle &p,
                                               const Utils::Vector3d &, double) {
-#ifdef DIPOLES
+#if defined(ROTATION) && defined(DIPOLES)
   return {{}, vector_product(p.calc_dip(), m_field)};
 #else
   return {};

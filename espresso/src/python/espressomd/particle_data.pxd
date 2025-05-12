@@ -63,6 +63,7 @@ cdef extern from "Particle.hpp":
         Vector3d omega()
         Vector3d torque()
         Quaternion[double] quat()
+        
         double dipm()
         double sigma_m()
         bint is_virtual()
@@ -102,6 +103,9 @@ cdef extern from "particle_data.hpp":
 
     IF ROTATION:
         void set_particle_quat(int part, const Quaternion[double] & quat)
+
+        void set_particle_dip_quat(int part, const Quaternion[double] & quat_dip)
+        
         void set_particle_director(int part, const Vector3d & director)
         void set_particle_omega_lab(int part, const Vector3d & omega)
         void set_particle_omega_body(int part, const Vector3d & omega)
@@ -113,7 +117,6 @@ cdef extern from "particle_data.hpp":
 
         void set_particle_easy_axis(int part, const Vector3d & easy_axis)
         void set_particle_sigma_m(int part, double sigma_m)
-
 
     IF VIRTUAL_SITES:
         void set_particle_virtual(int part, int isVirtual)

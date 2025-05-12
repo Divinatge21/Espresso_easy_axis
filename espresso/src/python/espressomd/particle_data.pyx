@@ -69,7 +69,7 @@ cdef class ParticleHandle:
         """
 
         pickle_attr = copy(particle_attributes)
-        for i in ["director", "dip", "easy_axis" ,"image_box", "node", "lees_edwards_flag"]:
+        for i in ["director", "dip", "easy_axis","image_box", "node", "lees_edwards_flag"]:
             if i in pickle_attr:
                 pickle_attr.remove(i)
         IF MASS == 0:
@@ -448,6 +448,34 @@ cdef class ParticleHandle:
                 cdef Quaternion[double] q = self.particle_data.quat()
                 return array_locked([q[0], q[1], q[2], q[3]])
 
+        property quat_dip:
+            """
+            Quaternion representation of the particle rotational position.
+
+            quat_dip : (4,) array_like of :obj:`float`
+
+            .. note::
+               This needs the feature ``ROTATION``.
+
+            """
+
+            def __set__(self, _q):
+                cdef Quaternion[double] q
+                check_type_or_throw_except(
+                    _q, 4, float, "Quaternions has to be 4 floats.")
+                if np.linalg.norm(_q) == 0.:
+                    raise ValueError("quaternion is zero")
+                for i in range(4):
+                    q[i] = _q[i]
+                set_particle_dip_quat(self._id, q)
+
+            def __get__(self):
+                self.update_particle_data()
+
+                cdef Quaternion[double] q = self.particle_data.quat()
+                return array_locked([q[0], q[1], q[2], q[3]])
+
+
         property director:
             """
             The particle director.
@@ -772,30 +800,32 @@ cdef class ParticleHandle:
                 self.update_particle_data()
                 return self.particle_data.dipm()
 
+
+
         property easy_axis:
-            """
-            The orientation of the easy axis.
-
-            easy_axis : (3,) array_like of :obj:`float`
-
-            .. note::
-               This needs the feature ``DIPOLES``.
-
-            """
-
-            def __set__(self, _easy_axis):
-                check_type_or_throw_except(
-                    _easy_axis, 3, float, "Easy Axis vector has to be 3 floats.")
-                set_particle_easy_axis(self._id, make_Vector3d(_easy_axis))
-
-            def __get__(self):
-                self.update_particle_data()
-                return make_array_locked(self.particle_data.calc_easy_axis())
-
-        # Parametr magnetic anisotropy
+             """
+             The orientation of the easy axis.
+ 
+             easy_axis : (3,) array_like of :obj:`float`
+ 
+             .. note::
+                This needs the feature ``DIPOLES``.
+ 
+             """
+ 
+             def __set__(self, _easy_axis):
+                 check_type_or_throw_except(
+                     _easy_axis, 3, float, "Easy Axis vector has to be 3 floats.")
+                 set_particle_easy_axis(self._id, make_Vector3d(_easy_axis))
+ 
+             def __get__(self):
+                 self.update_particle_data()
+                 return make_array_locked(self.particle_data.calc_easy_axis())
+ 
+         # Parametr magnetic anisotropy
         property sigma_m:
             """
-            Parametr magnetic anisotropy
+            The magnitude of the .
 
             sigma_m : :obj:`float`
 
@@ -806,7 +836,7 @@ cdef class ParticleHandle:
 
             def __set__(self, sigma_m):
                 check_type_or_throw_except(
-                    sigma_m, 1, float, "Parametr magnetic anisotropy has to be 1 float.")
+                    sigma_m, 1, float, "Magnitude of dipole moment has to be 1 float.")
                 set_particle_sigma_m(self._id, sigma_m)
 
             def __get__(self):

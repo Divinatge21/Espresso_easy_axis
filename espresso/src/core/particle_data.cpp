@@ -21,6 +21,8 @@
 
 #include "particle_data.hpp"
 
+#include "integrate.hpp"
+
 #include "Particle.hpp"
 #include "cells.hpp"
 #include "communication.hpp"
@@ -112,6 +114,7 @@ using UpdatePropertyMessage = boost::variant
 #ifdef DIPOLES
         , UpdateProperty<double, &Prop::dipm>
         , UpdateProperty<double, &Prop::sigma_m>
+
 #endif
 #ifdef VIRTUAL_SITES
         , UpdateProperty<bool, &Prop::is_virtual>
@@ -150,6 +153,8 @@ using UpdatePositionMessage = boost::variant
         < UpdatePosition<Utils::Vector3d, &ParticlePosition::p>
 #ifdef ROTATION
         , UpdatePosition<Utils::Quaternion<double>, &ParticlePosition::quat>
+        , UpdatePosition<Utils::Quaternion<double>, &ParticlePosition::quat_dip>
+        , UpdatePosition<Utils::Quaternion<double>, &ParticlePosition::delta_dir_quat>
 #endif
         >;
 
@@ -462,18 +467,27 @@ void rotate_particle(int part, const Utils::Vector3d &axis, double angle) {
 #endif
 
 #ifdef DIPOLES
+
+
 void set_particle_dipm(int part, double dipm) {
   mpi_update_particle_property<double, &ParticleProperties::dipm>(part, dipm);
 }
 
 void set_particle_dip(int part, Utils::Vector3d const &dip) {
-  Utils::Quaternion<double> quat;
-  double dipm;
-  std::tie(quat, dipm) = convert_dip_to_quat(dip);
+  Utils::Quaternion<double> quat_dip;
+  
+
+  double dipm = sqrt(dip[0] * dip[0] + dip[1] * dip[1] + dip[2] * dip[2]);
+  std::tie(quat_dip, dipm) = convert_dip_to_quat(dip);
+
+  //fprintf(stderr, "Dip_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+   // quat_dip[0], quat_dip[1], quat_dip[2], quat_dip[3]);
 
   set_particle_dipm(part, dipm);
-  set_particle_quat(part, quat);
+  set_particle_dip_quat(part, quat_dip);
+
 }
+
 
 void set_particle_sigma_m(int part, double sigma_m) {
   mpi_update_particle_property<double, &ParticleProperties::sigma_m>(part, sigma_m);
@@ -481,11 +495,35 @@ void set_particle_sigma_m(int part, double sigma_m) {
 
 void set_particle_easy_axis(int part, Utils::Vector3d const &easy_axis) {
   Utils::Quaternion<double> quat;
+  Utils::Quaternion<double> zero_quat;
   double sigma_m;
+
+  Utils::Quaternion<double> previous_quat;
+  Utils::Quaternion<double> current_quat;
+
+  // Сохраняем предыдущий кватернион
+  previous_quat = current_quat;
+
   std::tie(quat, sigma_m) = convert_easy_axis_to_quat(easy_axis);
 
+ //fprintf(stderr, "EasyAxis_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+    //quat[0], quat[1], quat[2], quat[3]);
+
+  // Обновляем текущий кватернион
+  current_quat = quat;
+
+  // Устанавливаем текущий кватернион и sigma_m
   set_particle_sigma_m(part, sigma_m);
   set_particle_quat(part, quat);
+
+  zero_quat = quat;
+
+  // Вычисляем разницу между предыдущим и текущим кватернионом
+  Utils::Quaternion<double> quat_difference = Utils::conjugate(previous_quat) * current_quat;
+
+  // Выводим разницу кватернионов
+  //fprintf(stderr, "Quaternion_difference = (%.20f, %.20f, %.20f, %.20f)\n", 
+  //  quat_difference[0], quat_difference[1], quat_difference[2], quat_difference[3]);
 }
 #endif
 
@@ -552,6 +590,12 @@ void set_particle_quat(int part, Utils::Quaternion<double> const &quat) {
   mpi_update_particle<ParticlePosition, &Particle::r, Utils::Quaternion<double>,
                       &ParticlePosition::quat>(part, quat);
 }
+
+void set_particle_dip_quat(int part, Utils::Quaternion<double> const &quat_dip) {
+  mpi_update_particle<ParticlePosition, &Particle::r, Utils::Quaternion<double>,
+                      &ParticlePosition::quat_dip>(part, quat_dip);
+}
+
 
 void set_particle_director(int part, const Utils::Vector3d &director) {
   Utils::Quaternion<double> quat =

@@ -68,6 +68,7 @@ struct CUDA_particle_data {
 
 #ifdef ROTATION
   Vector3f director;
+  Vector3f calc_dip;
 #endif
 
 #ifdef LB_ELECTROHYDRODYNAMICS
@@ -84,6 +85,7 @@ struct CUDA_particle_data {
 
 #ifdef DIPOLES
   Vector3f dip;
+  Vector3f easy_axis;
 #endif
 };
 

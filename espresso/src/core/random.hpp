@@ -57,7 +57,8 @@ enum class RNGSalt : uint32_t {
   NPTISO0_HALF_STEP2,
   NPTISOV,
   SALT_DPD,
-  THERMALIZED_BOND
+  THERMALIZED_BOND,
+  ANISOTROPY
 };
 
 namespace Random {

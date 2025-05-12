@@ -86,6 +86,7 @@ struct EasyAxisDirection {
     return particle_traits.easy_axis(p);
   }
 };
+
 } // namespace ParticleObservables
 
 #endif // OBSERVABLES_PROPERTIES_HPP

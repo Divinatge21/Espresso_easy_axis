@@ -150,6 +150,13 @@ void propagate_omega_quat_particle(Particle &p, double time_step) {
   p.omega() += time_step_half * Wd;
   p.quat() += time_step * (Qd + time_step_half * Qdd) - lambda * p.quat();
 
+
+
+  Utils::Quaternion<double> delta_dir_quat = p.quat();
+  p.delta_dir_quat() =  time_step * (Qd + time_step_half * Qdd) - lambda * p.quat();
+  //fprintf(stderr, "delta_dir_quat = (%.6f, %.6f, %.6f, %.6f)\n", 
+    //delta_dir_quat[0], delta_dir_quat[1], delta_dir_quat[2], delta_dir_quat[3]);
+
   /* and rescale quaternion, so it is exactly of unit length */
   auto const scale = p.quat().norm();
   if (scale == 0) {
@@ -157,6 +164,17 @@ void propagate_omega_quat_particle(Particle &p, double time_step) {
   } else {
     p.quat() /= scale;
   }
+
+  convert_quaternion_to_director(p.quat());
+  convert_dip_director_to_quaternion(p.calc_easy_axis());
+
+  #ifdef DIPOLES
+  // When dipoles are enabled, update dipole momentы
+
+  convert_quaternion_to_director(p.quat_dip());
+  convert_dip_director_to_quaternion(p.calc_dip());
+
+  #endif
 }
 
 void convert_torques_propagate_omega(const ParticleRange &particles,

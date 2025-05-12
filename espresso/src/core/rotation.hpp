@@ -110,29 +110,28 @@ auto convert_body_to_space(const Particle &p, const Utils::Matrix<T, 3, 3> &A) {
 /** convert a dipole moment to quaternions and dipolar strength  */
 inline std::pair<Utils::Quaternion<double>, double>
 convert_dip_to_quat(const Utils::Vector3d &dip) {
-  auto quat = Utils::convert_director_to_quaternion(dip);
 
- 
-  fprintf(stderr, "Dip_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
-    quat[0], quat[1], quat[2], quat[3]);
-    
-    
+  auto quat_dip = Utils::convert_director_to_quaternion(dip);
 
-  return {quat, dip.norm()};
+         // Вывод значения кватерниона
+ // fprintf(stderr, "Dip_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+ //   quat_dip[0], quat_dip[1], quat_dip[2], quat_dip[3]);
+
+  return {quat_dip, dip.norm()};
 }
 
 inline std::pair<Utils::Quaternion<double>, double>
-convert_easy_axis_to_quat(const Utils::Vector3d &easy_axis) {
-    auto quat = Utils::convert_director_to_quaternion(easy_axis);
-
-      // Вывод значения кватерниона
-      fprintf(stderr, "EasyAxis_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
-        quat[0], quat[1], quat[2], quat[3]);
-     
-
-
-  return {quat, easy_axis.norm()};
-}
+ convert_easy_axis_to_quat(const Utils::Vector3d &easy_axis) {
+     auto quat = Utils::convert_director_to_quaternion(easy_axis);
+ 
+       // Вывод значения кватерниона
+      // fprintf(stderr, "EasyAxis_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
+       // quat[0], quat[1], quat[2], quat[3]);
+      
+ 
+ 
+   return {quat, easy_axis.norm()};
+ }
 
 #endif
 
@@ -162,6 +161,14 @@ inline void local_rotate_particle(Particle &p,
     Utils::Vector3d axis = convert_vector_space_to_body(p, axis_space_frame);
     p.quat() = local_rotate_particle_body(p, axis, phi);
   }
+
+#ifdef DIPOLES
+  // When dipoles are enabled, update dipole momentы
+
+  convert_quaternion_to_director(p.quat_dip());
+  convert_dip_director_to_quaternion(p.calc_dip());
+
+#endif
 }
 
 inline void convert_torque_to_body_frame_apply_fix(Particle &p) {

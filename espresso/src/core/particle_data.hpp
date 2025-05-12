@@ -127,8 +127,15 @@ void set_particle_mol_id(int part, int mid);
 /** Call only on the head node: set particle orientation using quaternions.
  *  @param part the particle.
  *  @param quat its new value for quaternions.
+ *  @param delta_dir_quat its new value for quaternions.
  */
 void set_particle_quat(int part, Utils::Quaternion<double> const &quat);
+
+/** Call only on the head node: set particle orientation using quaternions.
+ *  @param part the particle.
+ *  @param quat_dip its new value for quaternions.
+ */
+void set_particle_dip_quat(int part, Utils::Quaternion<double> const &quat_dip);
 
 /** Call only on the head node: set particle orientation using director.
  *  The particle director defines the z-axis in the body-fixed frame.
@@ -169,17 +176,19 @@ void set_particle_dip(int part, Utils::Vector3d const &dip);
  */
 void set_particle_dipm(int part, double dipm);
 
-/** Call only on the head node: set particle easy_axis orientation.
- *  @param part the particle.
- *  @param easy_axis its new easu_axis orientation.
- */
-void set_particle_easy_axis(int part, Utils::Vector3d const &easy_axis);
 
-/** Call only on the head node: set particle parametr magnetic anisotropy (absolute value).
- *  @param part the particle.
- *  @param sigma_m its new parrrametr magnetic anisotropy.
- */
-void set_particle_sigma_m(int part, double sigma_m);
+/** Call only on the head node: set particle easy_axis orientation.
+  *  @param part the particle.
+  *  @param easy_axis its new easu_axis orientation.
+  */
+ void set_particle_easy_axis(int part, Utils::Vector3d const &easy_axis);
+ 
+ /** Call only on the head node: set particle parametr magnetic anisotropy (absolute value).
+  *  @param part the particle.
+  *  @param sigma_m its new parrrametr magnetic anisotropy.
+  */
+ void set_particle_sigma_m(int part, double sigma_m);
+
 #endif
 
 #ifdef VIRTUAL_SITES

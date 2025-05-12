@@ -3,7 +3,7 @@
  * Copyright (C) 2002,2003,2004,2005,2006,2007,2008,2009,2010
  *   Max-Planck-Institute for Polymer Research, Theory Group
  *
- * This file is part of ESPResSo.
+ * This file is э of ESPResSo.
  *
  * ESPResSo is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
  */
 
 #include "communication.hpp"
+
+#include "integrate.hpp"
 
 #include "errorhandling.hpp"
 #include "event.hpp"

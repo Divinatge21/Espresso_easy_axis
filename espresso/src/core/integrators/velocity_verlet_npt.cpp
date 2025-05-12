@@ -188,6 +188,8 @@ void velocity_verlet_npt_propagate_vel(const ParticleRange &particles,
   }
 }
 
+
+
 void velocity_verlet_npt_step_1(const ParticleRange &particles,
                                 double time_step) {
   velocity_verlet_npt_propagate_vel(particles, time_step);

@@ -27,6 +27,8 @@
 #include "integrate.hpp"
 #include "rotation.hpp"
 
+
+void add_Brown_Neel_rotation();
 /** Propagate the velocities and positions. Integration steps before force
  *  calculation of the Velocity Verlet integrator: <br> \f[ v(t+0.5 \Delta t) =
  *  v(t) + 0.5 \Delta t f(t)/m \f] <br> \f[ p(t+\Delta t) = p(t) + \Delta t
@@ -76,6 +78,7 @@ inline void velocity_verlet_propagate_vel_final(const ParticleRange &particles,
   }
 }
 
+
 inline void velocity_verlet_step_1(const ParticleRange &particles,
                                    double time_step) {
   velocity_verlet_propagate_vel_pos(particles, time_step);
@@ -87,6 +90,8 @@ inline void velocity_verlet_step_2(const ParticleRange &particles,
   velocity_verlet_propagate_vel_final(particles, time_step);
 #ifdef ROTATION
   convert_torques_propagate_omega(particles, time_step);
+  add_Brown_Neel_rotation();
+
 #endif
 }
 

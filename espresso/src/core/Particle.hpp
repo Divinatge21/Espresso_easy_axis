@@ -23,6 +23,8 @@
 
 #include "BondList.hpp"
 
+#include "integrate.hpp"
+
 #include <utils/Vector.hpp>
 #include <utils/compact_vector.hpp>
 #include <utils/math/quaternion.hpp>
@@ -36,6 +38,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <vector>
+#include <cstdio>
 
 namespace detail {
 inline void check_axis_idx_valid(unsigned int const axis) { assert(axis <= 2); }
@@ -148,15 +151,9 @@ struct ParticleProperties {
 
 #ifdef DIPOLES
   /** dipole moment (absolute value) */
-  
-  /** dipole moment. This is synchronized with quatu and quat aw well as with LLG equation. */
-  Utils::Vector3d dip = {0., 0., 0.};
-
-  /** easy axis dirertion. This is synchronized with quatu and quat. */
-  Utils::Vector3d easy_axis = {0., 0., 0.};
-  
   double dipm = 0.;
-  double sigma_m = 0.;
+
+  double sigma_m = 0;
 #endif
 
 #ifdef VIRTUAL_SITES_RELATIVE
@@ -270,22 +267,63 @@ struct ParticleProperties {
  *  communicated to calculate interactions with ghost particles.
  */
 struct ParticlePosition {
-  /** periodically folded position. */
+  // Периодически свёрнутая позиция.
   Utils::Vector3d p = {0., 0., 0.};
-  /** index of the simulation box image where the particle really sits. */
+  // Индекс ячейки симуляционной коробки, в которой на самом деле находится частица.
   Utils::Vector3i i = {0, 0, 0};
 
 #ifdef ROTATION
-  /** quaternion to define particle orientation */
+  // Кватернион для определения ориентации частицы
   Utils::Quaternion<double> quat = Utils::Quaternion<double>::identity();
-  /** unit director calculated from the quaternion */
+  Utils::Quaternion<double> delta_dir_quat = Utils::Quaternion<double>::identity();
+
+    // Метод для вычисления единичного директора, рассчитанного из кватерниона
   Utils::Vector3d calc_director() const {
-    return Utils::convert_quaternion_to_director(quat);
+      return Utils::convert_quaternion_to_director(quat);
+    }
+
+  // Кватернион предыдущего состояния
+  Utils::Quaternion<double> quat_last = Utils::Quaternion<double>::identity();
+
+  // Метод, вычисляющий разницу между текущим и предыдущим кватернионами
+  Utils::Quaternion<double> initialize_and_calculate_delta() {
+    quat_last = quat;
+  //quaternion_difference(quat, quat_last);
+  Utils::Quaternion<double> delta_quat = Utils::quaternion_difference_con(quat, quat_last);
+
+
+  /*fprintf(stderr, "quat = (%.20f, %.20f, %.20f, %.20f)\n", 
+    quat[0], quat[1], quat[2], quat[3]);
+  fprintf(stderr, "quat_last = (%.20f, %.20f, %.20f, %.20f)\n", 
+    quat_last[0], quat_last[1], quat_last[2], quat_last[3]);
+  fprintf(stderr, "delta_quat = (%.20f, %.20f, %.20f, %.20f)\n", 
+      delta_quat[0], delta_quat[1], delta_quat[2], delta_quat[3]);*/
+  
+
+
+  return delta_quat;
+}
+
+
+  Utils::Quaternion<double> quat_dip = Utils::Quaternion<double>::identity();
+
+  // Метод для вычисления единичного директора, рассчитанного из кватерниона
+  Utils::Vector3d calc_dip() const {
+  return Utils::convert_quaternion_to_director(quat_dip);
   }
+
+#endif
+
+#ifdef DIPOLES
+  /** dipole moment. This is synchronized with quatu and quat aw well as with LLG equation. */
+  Utils::Vector3d dip = {0., 0., 0.};
+  /** easy axis dirertion. This is synchronized with quatu and quat. */
+  Utils::Vector3d easy_axis = {0., 0., 0.};
+
 #endif
 
 #ifdef BOND_CONSTRAINT
-  /** particle position at the previous time step (RATTLE algorithm) */
+  // Позиция частицы на предыдущем временном шаге (алгоритм RATTLE)
   Utils::Vector3d p_last_timestep = {0., 0., 0.};
 #endif
 
@@ -294,12 +332,28 @@ struct ParticlePosition {
     ar &i;
 #ifdef ROTATION
     ar &quat;
+    ar &quat_last; // Сериализуем предыдущий кватернио
+    ar &quat_dip;
+    
+    
+#endif
+
+#ifdef DIPOLES
+
+  ar &dip;
+  ar &easy_axis;
+  
+    
+    
 #endif
 #ifdef BOND_CONSTRAINT
     ar &p_last_timestep;
 #endif
   }
+
+  // Дополнительные методы (если нужно)...
 };
+
 
 /** Force information on a particle. Forces of ghost particles are
  *  collected and added up to the force of the original particle.
@@ -494,6 +548,13 @@ public:
   }
   auto const &quat() const { return r.quat; }
   auto &quat() { return r.quat; }
+
+  auto const &delta_dir_quat() const { return r.delta_dir_quat; }
+  auto &delta_dir_quat() { return r.delta_dir_quat; }
+
+  auto const &quat_dip() const { return r.quat_dip; }
+  auto &quat_dip() { return r.quat_dip; }
+
   auto const &torque() const { return f.torque; }
   auto &torque() { return f.torque; }
   auto const &omega() const { return m.omega; }
@@ -508,13 +569,23 @@ public:
   bool can_rotate_around(int const axis) const { return false; }
 #endif // ROTATION
 #ifdef DIPOLES
+
+  auto initialize_and_calculate_delta();
+
   auto const &dipm() const { return p.dipm; }
   auto &dipm() { return p.dipm; }
-  auto calc_dip() const { return calc_director() * dipm(); }
 
   auto const &sigma_m() const { return p.sigma_m; }
   auto &sigma_m() { return p.sigma_m; }
-  auto calc_easy_axis() const { return calc_director(); }
+
+ // \auto calc_dip() const { return r.calc_dip();}
+  auto calc_dip() const { return r.calc_dip() * dipm(); }
+  auto dip() const { return calc_dip(); }
+
+  //auto const &easy_axis() const { return p.easy_axis; }
+
+  auto calc_easy_axis() const { return r.calc_director(); }
+  auto easy_axis() const { return calc_easy_axis(); }
 #endif
 #ifdef ROTATIONAL_INERTIA
   auto const &rinertia() const { return p.rinertia; }

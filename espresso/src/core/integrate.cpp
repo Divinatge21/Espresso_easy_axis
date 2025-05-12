@@ -33,6 +33,9 @@
 #include "integrators/velocity_verlet_inline.hpp"
 #include "integrators/velocity_verlet_npt.hpp"
 
+
+#include "Particle.hpp"
+
 #include "ParticleRange.hpp"
 #include "accumulators.hpp"
 #include "bond_breakage/bond_breakage.hpp"
@@ -56,6 +59,10 @@
 #include "thermostat.hpp"
 #include "virtual_sites.hpp"
 
+
+#include "constraints.hpp"
+#include "constraints/HomogeneousMagneticField.hpp"
+
 #include <profiler/profiler.hpp>
 
 #include <boost/range/algorithm/min_element.hpp>
@@ -67,6 +74,7 @@
 #include <functional>
 #include <stdexcept>
 #include <utility>
+#include <cstdio>
 
 #ifdef VALGRIND_INSTRUMENTATION
 #include <callgrind.h>
@@ -132,6 +140,7 @@ void unset_protocol() {
   ::recalc_forces = true;
   cell_structure.set_resort_particles(Cells::RESORT_LOCAL);
 }
+
 
 template <class Kernel> void run_kernel() {
   if (box_geo.type() == BoxType::LEES_EDWARDS) {
@@ -275,9 +284,7 @@ int integrate(int n_steps, int reuse_forces) {
     force_calc(cell_structure, time_step, temperature);
 
     if (integ_switch != INTEG_METHOD_STEEPEST_DESCENT) {
-#ifdef ROTATION
-      convert_initial_torques(cell_structure.local_particles());
-#endif
+
     }
 
     ESPRESSO_PROFILER_MARK_END("Initial Force Calculation");
@@ -584,4 +591,156 @@ REGISTER_CALLBACK(mpi_set_integ_switch_local)
 
 void mpi_set_integ_switch(int integ_switch) {
   mpi_call_all(mpi_set_integ_switch_local, integ_switch);
+}
+
+double gaussian_random() {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::normal_distribution<double> dist(0.0, 1.0); // среднее значение 0, стандартное отклонение 1
+  return dist(gen);
+}
+
+
+void add_Brown_Neel_rotation(){
+
+  Utils::Vector3d H_ext = {0.0, 0.0, 0.0};
+  for (auto &c : Constraints::constraints) {
+      auto cs = std::dynamic_pointer_cast<const Constraints::HomogeneousMagneticField>(c);
+      if (cs) {
+        H_ext = cs->H();
+      }
+  }
+
+
+  double lamda_llg = 0.2;
+  double Ito = 1.0;
+  double inv_lamda_llg = 1.0/lamda_llg;
+  double noise_coef = (1 / sqrt(2 * (1 + lamda_llg * lamda_llg)));
+
+  //Utils::Vector3d dW = {0.0, 0.0, 0.0};
+  //dW[0] = gaussian_random();
+  //dW[1] = gaussian_random();
+  //dW[2] = gaussian_random();
+
+  //dW *= 2*lamda_llg*sqrt(time_step)/sqrt(1 + lamda_llg*lamda_llg);
+
+
+  Utils::Vector3d H_field = {0.0, 0.0, 0.0};
+
+  //static FILE* omega_log_file = fopen("omega_log.txt", "w");
+  //static FILE* torque_log_file = fopen("torque_log.txt", "w");
+  //static FILE* delta_u_log_file = fopen("delta_u_log.txt", "w");
+
+  for (auto &p : cell_structure.local_particles()) {
+      auto sigma = p.sigma_m();
+
+      Utils::Vector3d dW = {0.0, 0.0, 0.0};
+      dW =  Random::noise_gaussian<RNGSalt::LANGEVIN_ROT, 3>(langevin.rng_counter(), langevin.rng_seed(), p.id());
+      dW *= 2*lamda_llg*sqrt(time_step)/sqrt(1 + lamda_llg*lamda_llg);
+
+      /*fprintf(stderr, "Sigma_any = (%.3f)\n", sigma);*/
+    
+      // Euler Muruyama scheme for LLG [Ilg2017]     
+      Utils::Vector3d m = p.calc_dip();
+
+
+      //fprintf(stderr, "Vector m(calc_dip) = (%.3f,%.3f,%.3f)\n", m[0], m[1], m[2]);
+
+      Utils::Vector3d n = p.calc_easy_axis();
+
+      /*fprintf(stderr, "Vector n(calc_easy_axis) = (%.3f,%.3f,%.3f)\n",
+        n[0], n[1], n[2]);*/
+
+      double dot_m_easy_axis = m * n; //dot(inner) product
+
+      /*fprintf(stderr, "dot_m_easy_axis = (%.10f)\n",
+        dot_m_easy_axis);*/
+
+      Utils::Vector3d H_aniso = 2 * sigma * dot_m_easy_axis * n;
+      H_field = H_ext + H_aniso;
+
+
+      auto m_on_H = vector_product(m, H_field);
+
+      //fprintf(stderr, "m_on_H = (%.10f,%.10f,%.10f)\n",
+        //m_on_H[0], m_on_H[1], m_on_H[2]);
+
+      auto m_on_m_on_H = vector_product(m, m_on_H);
+
+      //fprintf(stderr, "m_on_m_on_H = (%.10f,%.10f,%.10f)\n",
+        //m_on_m_on_H[0], m_on_m_on_H[1], m_on_m_on_H[2]);
+
+      auto normal_part = inv_lamda_llg*m_on_H + m_on_m_on_H;
+
+      auto m_on_dW = vector_product(m, dW);
+      auto m_on_m_on_dW = vector_product(m, m_on_dW);
+		
+      auto llg_noise_part = m_on_dW + lamda_llg * m_on_m_on_dW ;
+		    //- noise_coef * llg_noise_part
+      
+        //delta_e from [Ilg2017]
+      auto delta_m = -0.5 * time_step * (normal_part - m*Ito) - noise_coef * llg_noise_part;
+
+      //fprintf(stderr, "Vector m(calc_dip) = (%.10f,%.10f,%.10f)\n",
+        //delta_m [0], delta_m [1], delta_m [2]);
+
+      //fprintf(stderr, "normal_part = (%.10f,%.10f,%.10f)\n",
+        //normal_part[0], normal_part[1], normal_part[2]);
+
+       //p.quat() - Utils::convert_director_to_quaternion(n)
+       Utils::Quaternion<double> delta_n; 
+
+      // Если объект не вращается, возвращаем значение дельта-кватерниона сразу
+      if (!p.can_rotate()) {
+       delta_n = p.delta_dir_quat()- Utils::convert_director_to_quaternion(n);
+      }
+      else{
+      // Иначе вычисляем разность между кватернионом направления объекта и направляющим кватернионом n
+      delta_n = p.delta_dir_quat();
+      }
+      
+
+        
+      
+     // fprintf(stderr, "delta_n = (%.6f, %.6f, %.6f, %.6f)\n", 
+       // delta_n[0], delta_n[1], delta_n[2], delta_n[3]);
+
+
+      //update_delta();
+      //fprintf( "delta_easy_axis = (%.6f, %.6f, %.6f, %.6f)\n", 
+        //delta_easy_axis[0], delta_easy_axis[1], delta_easy_axis[2], delta_easy_axis[3]);
+
+
+      //Calculate delta_u from [Ilg2017]. We use quaternion to obtain delta_u then we convet quat --> 3d vector.
+      Utils::Vector3d delta_u = Utils::convert_quaternion_to_director(delta_n);
+
+     // fprintf(stderr, "delta_u = (%.10f, %.10f, %.10f)\n", 
+       // delta_u[0], delta_u[1], delta_u[2]);
+        //Neel rotation of dip
+
+      auto new_dip = p.calc_dip() + delta_m + delta_u; 
+
+      // Выводим на экран
+     // fprintf(stderr, "new_calc_dip = (%.6f, %.6f, %.6f)\n", new_dip[0], new_dip[1], new_dip[2]);
+
+      p.r.dip = new_dip;
+      
+      
+      p.r.dip.normalize();
+
+      auto new_easy_axis = p.calc_easy_axis() +  delta_u;
+      p.r.easy_axis = new_easy_axis;
+
+      p.r.easy_axis.normalize();
+
+      p.r.quat_dip = Utils::convert_dip_director_to_quaternion(p.r.dip);
+      Utils::convert_quaternion_to_director(p.r.quat_dip);
+
+      p.r.quat = Utils::convert_director_to_quaternion(p.r.easy_axis);
+      Utils::convert_quaternion_to_director(p.r.quat);
+
+
+      }
+
+
 }

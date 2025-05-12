@@ -50,6 +50,8 @@ extern bool set_py_interrupt;
 
 double interaction_range();
 
+
+
 /** Check integrator parameters and incompatibilities between the integrator
  *  and the currently active thermostat(s).
  */
@@ -135,6 +137,9 @@ void integrate_set_bd();
 /** @brief Set the Stokesian Dynamics integrator. */
 void integrate_set_sd();
 
+/** @brief Set the velocity Verlet integrator for the NVT ensemble. */
+void add_Brown_Neel_rotation();
+
 #ifdef NPT
 /** @brief Set the velocity Verlet integrator modified for the NpT ensemble
  *  with isotropic rescaling.
@@ -163,6 +168,8 @@ double get_time_step();
 /** Get simulation time */
 double get_sim_time();
 
+void add_Brown_Neel_rotation();
+
 /** Increase simulation time (only on head node) */
 void increment_sim_time(double amount);
 
@@ -181,5 +188,4 @@ void mpi_set_skin_local(double skin);
 void mpi_set_time(double time);
 
 void mpi_set_integ_switch(int integ_switch);
-
 #endif

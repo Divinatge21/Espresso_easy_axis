@@ -50,6 +50,7 @@ static void pack_particles(ParticleRange particles,
 
 #ifdef DIPOLES
     buffer[i].dip = static_cast<Vector3f>(part.calc_dip());
+    buffer[i].easy_axis= static_cast<Vector3f>(part.calc_easy_axis());
 #endif
 
 #ifdef LB_ELECTROHYDRODYNAMICS
@@ -66,6 +67,8 @@ static void pack_particles(ParticleRange particles,
 
 #ifdef ROTATION
     buffer[i].director = static_cast<Vector3f>(part.calc_director());
+    buffer[i].dip = static_cast<Vector3f>(part.calc_dip());
+    buffer[i].easy_axis= static_cast<Vector3f>(part.calc_easy_axis());
 #endif
 
 #ifdef ENGINE
