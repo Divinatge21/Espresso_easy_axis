@@ -1,0 +1,50 @@
+---
+codecov:
+  branch: python
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  precision: 0
+  round: down
+  range: "70...100"
+
+  status:
+    project:
+      default: false
+      integration_tests:
+        paths:
+          - testsuite/python/
+        enabled: yes
+        threshold: 1%
+      tests:
+        paths:
+          - src/core/unit_tests/
+        enabled: yes
+        threshold: 1%
+      core:
+        paths:
+          - "!src/core/unit_tests/"
+        enabled: yes
+        threshold: 1%
+    patch:
+      default:
+        enabled: yes
+        threshold: 2%
+    changes: no
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment: false
+
+ignore:
+  - "libs"
+  - "doc/tutorials"
+  - "samples"
+  - "maintainer"

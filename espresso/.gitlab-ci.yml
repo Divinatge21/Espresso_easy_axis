@@ -1,0 +1,632 @@
+image: ghcr.io/espressomd/docker/ubuntu-20.04:7db5674cf3eca1ce80a5ce970661494ec6612924
+
+stages:
+  - prepare
+  - build
+  - additional_checks
+  - result
+
+.global_job_template: &global_job_definition
+  except:
+    - staging.tmp
+    - trying.tmp
+  before_script:
+    - git config --global --add safe.directory ${CI_PROJECT_DIR}
+    - git config --global --add safe.directory ${CI_PROJECT_DIR}/libs/h5xx
+  timeout: 1h
+  interruptible: true
+
+.notification_job_template: &notification_job_definition
+  <<: *global_job_definition
+  variables:
+    GIT_SUBMODULE_STRATEGY: none
+  before_script:
+    - git config --global --add safe.directory ${CI_PROJECT_DIR}
+  dependencies: []
+  timeout: 40m
+  interruptible: false
+  tags:
+    - espresso
+    - no-cuda
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  CCACHE_DIR: /cache
+  CCACHE_MAXSIZE: 100G
+  with_ccache: "true"
+
+status_pending:
+  <<: *notification_job_definition
+  stage: prepare
+  script: sh maintainer/gh_post_status.sh pending
+
+style:
+  <<: *global_job_definition
+  stage: prepare
+  dependencies: []
+  before_script:
+    - git config --global --add safe.directory ${CI_PROJECT_DIR}
+    - git submodule deinit .
+  script:
+    - sh maintainer/CI/fix_style.sh
+  tags:
+    - espresso
+    - no-cuda
+  variables:
+    GIT_SUBMODULE_STRATEGY: none
+  artifacts:
+    paths:
+    - style.patch
+    expire_in: 1 week
+    when: on_failure
+
+style_doxygen:
+  <<: *global_job_definition
+  stage: prepare
+  dependencies: []
+  script:
+    - mkdir build
+    - cd build
+    - cp ../maintainer/configs/maxset.hpp myconfig.hpp
+    - cmake .. -DWITH_CUDA=ON -DWITH_SCAFACOS=ON
+    - sh ../maintainer/CI/dox_warnings.sh
+  tags:
+    - espresso
+    - no-cuda
+
+### Builds without CUDA
+
+default:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-9'
+     CXX: 'g++-9'
+     with_cuda: 'false'
+     myconfig: 'default'
+     with_coverage: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+     check_skip_long: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+maxset:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-9'
+     CXX: 'g++-9'
+     with_cuda: 'false'
+     with_cxx_standard: '17'
+     myconfig: 'maxset'
+     with_coverage: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+     check_skip_long: 'true'
+     cmake_params: '-DTEST_NP=8'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+    - numa
+
+no_rotation:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-9'
+     CXX: 'g++-9'
+     with_cuda: 'false'
+     myconfig: 'no_rotation'
+     with_coverage: 'true'
+     with_scafacos: 'true'
+     check_skip_long: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+    - numa
+
+ubuntu:wo-dependencies:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/ubuntu-wo-dependencies:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     myconfig: 'maxset'
+     with_cuda: 'false'
+     with_hdf5: 'false'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+### Builds with different distributions
+
+debian:10:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/debian:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     with_cuda: 'false'
+     myconfig: 'maxset'
+     make_check_python: 'false'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+debian:12:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/debian:f7f8ef2c0ca93c67aa16b9f91785492fb04ecc1b
+  variables:
+     with_cuda: 'false'
+     myconfig: 'maxset'
+     make_check_python: 'false'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+fedora:36:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/fedora:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     with_cuda: 'false'
+     myconfig: 'maxset'
+     make_check_python: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+fedora:40:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/fedora:f7f8ef2c0ca93c67aa16b9f91785492fb04ecc1b
+  variables:
+     with_cuda: 'false'
+     with_gsl: 'false'
+     myconfig: 'maxset'
+     make_check_python: 'true'
+     with_stokesian_dynamics: 'true'
+     cmake_params: '-D CMAKE_INCLUDE_PATH=/usr/include/mpich-x86_64 -D CMAKE_PREFIX_PATH=/usr/lib64/mpich/lib/'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+
+### Builds with CUDA
+
+clang-sanitizer:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'clang-9'
+     CXX: 'clang++-9'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_cuda_compiler: 'clang'
+     with_coverage: 'false'
+     with_static_analysis: 'true'
+     check_skip_long: 'true'
+     with_asan: 'false'
+     with_ubsan: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  timeout: 2h
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+fast_math:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/cuda:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     CC: 'gcc-9'
+     CXX: 'g++-9'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_scafacos: 'false'
+     with_stokesian_dynamics: 'true'
+     with_fast_math: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+  when: manual
+
+cuda12-maxset-ubuntu24.04:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/ubuntu:f7f8ef2c0ca93c67aa16b9f91785492fb04ecc1b
+  variables:
+     CC: 'gcc-12'
+     CXX: 'g++-12'
+     GCOV: 'gcov-12'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_coverage_python: 'false'
+     check_skip_long: 'false'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+cuda11-maxset-ubuntu20.04:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/cuda:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     CC: 'gcc-9'
+     CXX: 'g++-9'
+     GCOV: 'gcov-9'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'true'
+     with_coverage_python: 'true'
+     check_skip_long: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+cuda11-maxset-ubuntu22.04:
+  <<: *global_job_definition
+  stage: build
+  image: ghcr.io/espressomd/docker/ubuntu-22.04:7db5674cf3eca1ce80a5ce970661494ec6612924
+  variables:
+     CC: 'gcc-10'
+     CXX: 'g++-10'
+     GCOV: 'gcov-10'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'true'
+     with_coverage_python: 'true'
+     check_skip_long: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+cuda10-maxset:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_coverage_python: 'true'
+     test_timeout: '900'
+     srcdir: '${CI_PROJECT_DIR}'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  artifacts:
+    paths:
+    - build/
+    expire_in: 1 week
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+tutorials-samples-maxset:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_coverage_python: 'true'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+     make_check_tutorials: 'true'
+     make_check_samples: 'true'
+     make_check_benchmarks: 'true'
+     test_timeout: '1200'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+
+tutorials-samples-default:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'default'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_scafacos: 'true'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+     make_check_tutorials: 'true'
+     make_check_samples: 'true'
+     make_check_benchmarks: 'true'
+     test_timeout: '1200'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+  only:
+    - schedules
+
+tutorials-samples-empty:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'empty'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_scafacos: 'true'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+     make_check_tutorials: 'true'
+     make_check_samples: 'true'
+     make_check_benchmarks: 'true'
+     test_timeout: '1200'
+     with_scafacos: 'false'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+  only:
+    - schedules
+
+tutorials-samples-no-gpu:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     with_scafacos: 'true'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+     make_check_tutorials: 'true'
+     make_check_samples: 'true'
+     make_check_benchmarks: 'true'
+     test_timeout: '1200'
+     hide_gpu: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - no-cuda
+  only:
+    - schedules
+
+installation:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'gcc-8'
+     CXX: 'g++-8'
+     myconfig: 'maxset'
+     with_cuda: 'true'
+     with_coverage: 'false'
+     make_check_unit_tests: 'false'
+     make_check_python: 'false'
+     with_scafacos: 'true'
+     with_stokesian_dynamics: 'true'
+     srcdir: '${CI_PROJECT_DIR}'
+     build_type: 'Release'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+    - cd build
+    - make install
+    # get path of installed files
+    - CI_INSTALL_DIR="/tmp/espresso-unit-tests"
+    - CI_INSTALL_PYTHON_PATH=$(dirname $(find "${CI_INSTALL_DIR}/lib" -name espressomd))
+    - CI_CORES=$(cmake -L . | grep CTEST_ARGS | grep --color=never -Po '(?<=-j)[0-9]+')
+    # deploy object-in-fluid module
+    - cp -r "src/python/object_in_fluid" "${CI_INSTALL_PYTHON_PATH}/object_in_fluid"
+    # run all tests with the installed files
+    - sed -i "s|$(pwd)/pypresso|${CI_INSTALL_DIR}/bin/pypresso|" testsuite/{python,scripts/samples,scripts/tutorials}/CTestTestfile.cmake
+    - make -j ${CI_CORES} check_python_skip_long
+    - make -j ${CI_CORES} check_samples
+    - make -j 2 check_tutorials
+  tags:
+    - espresso
+    - cuda
+  when: manual
+
+empty:
+  <<: *global_job_definition
+  stage: build
+  variables:
+     CC: 'clang-9'
+     CXX: 'clang++-9'
+     myconfig: 'empty'
+     with_cuda: 'true'
+     with_cuda_compiler: 'clang'
+     with_static_analysis: 'true'
+     with_scafacos: 'false'
+     with_stokesian_dynamics: 'false'
+     with_coverage: 'false'
+     with_coverage_python: 'true'
+  script:
+    - bash maintainer/CI/build_cmake.sh
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+check_sphinx:
+  <<: *global_job_definition
+  stage: additional_checks
+  needs:
+    - cuda10-maxset
+  when: on_success
+  script:
+    - cd ${CI_PROJECT_DIR}/build
+    - make -t && make sphinx
+    - make -j2 tutorials
+    - make check_utils
+    - bash ${CI_PROJECT_DIR}/maintainer/CI/doc_warnings.sh
+    - python3 ${CI_PROJECT_DIR}/maintainer/CI/jupyter_warnings.py
+  artifacts:
+    paths:
+    - build/doc/sphinx
+    expire_in: 1 week
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+run_tutorials:
+  <<: *global_job_definition
+  stage: additional_checks
+  needs:
+    - cuda10-maxset
+  when: on_success
+  script:
+    - cd ${CI_PROJECT_DIR}/build
+    - make -t
+    - make tutorials
+    - make -j1 tutorials_html
+    - cd doc/tutorials
+    - mkdir html
+    - ${CI_PROJECT_DIR}/maintainer/CI/deploy_tutorials.py
+    - rsync -a --files-from=deploy_list.txt ./ html
+  artifacts:
+    paths:
+    - build/doc/tutorials
+    expire_in: 1 week
+  timeout: 2h
+  tags:
+    - espresso
+    - cuda
+    - numa
+  only:
+    - schedules
+
+run_doxygen:
+  <<: *global_job_definition
+  stage: additional_checks
+  needs:
+    - cuda10-maxset
+  when: on_success
+  only:
+    - python
+  script:
+    - cd ${CI_PROJECT_DIR}/build
+    - make -t && make doxygen
+  artifacts:
+    paths:
+    - build/doc/doxygen
+    expire_in: 1 week
+  tags:
+    - espresso
+    - no-cuda
+    - numa
+
+maxset_no_gpu:
+  <<: *global_job_definition
+  stage: additional_checks
+  when: on_success
+  needs:
+    - cuda10-maxset
+  script:
+    - export CUDA_VISIBLE_DEVICES=""
+    - cd ${CI_PROJECT_DIR}/build
+    - make -t && make check
+  tags:
+    - espresso
+    - no-cuda
+    - numa
+
+maxset_3_cores:
+  <<: *global_job_definition
+  stage: additional_checks
+  when: on_success
+  needs:
+    - cuda10-maxset
+  script:
+    - cd ${CI_PROJECT_DIR}/build
+    - cmake -DTEST_NP=3 .
+    - make -t && make check_unit_tests && make check_python_parallel_odd
+  tags:
+    - espresso
+    - cuda
+    - numa
+
+status_success:
+  <<: *notification_job_definition
+  stage: result
+  script: sh maintainer/gh_post_status.sh success
+  when: on_success
+
+status_failure:
+  <<: *notification_job_definition
+  stage: result
+  script: sh maintainer/gh_post_status.sh failure
+  when: on_failure
+
+notify_success:
+  <<: *notification_job_definition
+  stage: result
+  script: sh maintainer/gh_close_issue.sh
+  when: on_success
+  only:
+    - python
+
+notify_failure:
+  <<: *notification_job_definition
+  stage: result
+  script: sh maintainer/gh_create_issue.sh
+  when: on_failure
+  only:
+    - python

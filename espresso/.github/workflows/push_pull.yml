@@ -1,0 +1,24 @@
+name: run tests on macOS
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  macos:
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Setup Python environment
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: '3.9'
+      - name: Build and check
+        uses: ./.github/actions/build_and_check
+        env:
+          build_procs: 4
+          check_procs: 4

@@ -1,0 +1,1000 @@
+ 1002  make
+ 1003  cmake ..
+ 1004  make
+ 1005  ./pypresso Ferrofluid_part3.py
+ 1006  make
+ 1007  cmake ..
+ 1008  make
+ 1009  ./pypresso Ferrofluid_part3.py
+ 1010  cd Espresso_4_2_2/espresso/build/
+ 1011  ./pypresso Ferrofluid_part3.py
+ 1012  make
+ 1013  ./pypresso Ferrofluid_part3.py
+ 1014  make
+ 1015  ./pypresso Ferrofluid_part3.py
+ 1016  make
+ 1017  ./pypresso Ferrofluid_part3.py
+ 1018  make
+ 1019  ./pypresso Ferrofluid_part3.py
+ 1020  make
+ 1021  ./pypresso Ferrofluid_part3.py
+ 1022  cd Espresso_4_2_2/espresso/build/
+ 1023  make
+ 1024  cd Espresso_4_2_2/espresso/build/
+ 1025  make
+ 1026  cmake ..
+ 1027  make
+ 1028  cmake ..
+ 1029  make
+ 1030  cmake ..
+ 1031  make
+ 1032  ./pypresso Ferrofluid_part3.py
+ 1033  ./pypresso 
+ 1034  ./pypresso Ferrofluid_part3.py
+ 1035  make
+ 1036  ./pypresso Ferrofluid_part3.py
+ 1037  cmake ..
+ 1038  make
+ 1039  ./pypresso Ferrofluid_part3.py
+ 1040  make
+ 1041  ./pypresso Ferrofluid_part3.py
+ 1042  cd ..
+ 1043  rm -r build
+ 1044  ls
+ 1045  mkdir build
+ 1046  cd build/
+ 1047  cmake ..
+ 1048  make
+ 1049  cmake ..
+ 1050  make
+ 1051  make
+ 1052  ./pypresso Ferrofluid_part3.py
+ 1053  make
+ 1054  ./pypresso Ferrofluid_part3.py
+ 1055  make
+ 1056  cd Espresso_4_2_2/espresso/build/
+ 1057  make
+ 1058  ./pypresso Ferrofluid_part3.py
+ 1059  make
+ 1060  ./pypresso Ferrofluid_part3.py
+ 1061  make
+ 1062  ./pypresso Ferrofluid_part3.py
+ 1063  make
+ 1064  ./pypresso Ferrofluid_part3.py
+ 1065  make
+ 1066  ./pypresso Ferrofluid_part3.py
+ 1067  make
+ 1068  ./pypresso Ferrofluid_part3.py
+ 1069  cd Espresso_4_2_2/espresso/build/
+ 1070  make
+ 1071  cd Espresso_4_2_2/espresso/build/
+ 1072  make
+ 1073  ./pypresso Ferrofluid_part3.py
+ 1074  make
+ 1075  ./pypresso Ferrofluid_part3.py
+ 1076  make
+ 1077  ./pypresso Ferrofluid_part3.py
+ 1078  make
+ 1079  ./pypresso Ferrofluid_part3.py
+ 1080  make
+ 1081  ./pypresso Ferrofluid_part3.py
+ 1082  make
+ 1083  ./pypresso Ferrofluid_part3.py
+ 1084  make
+ 1085  ./pypresso Ferrofluid_part3.py
+ 1086  make
+ 1087  ./pypresso Ferrofluid_part3.py
+ 1088  make
+ 1089  ./pypresso Ferrofluid_part3.py
+ 1090  make
+ 1091  ./pypresso Ferrofluid_part3.py
+ 1092  make
+ 1093  ./pypresso Ferrofluid_part3.py
+ 1094  make
+ 1095  ./pypresso Ferrofluid_part3.py
+ 1096  make
+ 1097  ./pypresso Ferrofluid_part3.py
+ 1098  make
+ 1099  ./pypresso Ferrofluid_part3.py
+ 1100  make
+ 1101  ./pypresso Ferrofluid_part3.py
+ 1102  make
+ 1103  ./pypresso Ferrofluid_part3.py
+ 1104  make
+ 1105  ./pypresso Ferrofluid_part3.py
+ 1106  make
+ 1107  ./pypresso Ferrofluid_part3.py
+ 1108  make
+ 1109  ./pypresso Ferrofluid_part3.py
+ 1110  make
+ 1111  ./pypresso Ferrofluid_part3.py
+ 1112  make
+ 1113  ./pypresso Ferrofluid_part3.py
+ 1114  make
+ 1115  make clean
+ 1116  make
+ 1117  ./pypresso Ferrofluid_part3.py
+ 1118  ./pypresso Ferrofluid_part3.py\
+ 1119  ./pypresso Ferrofluid_part3.py
+ 1120  make
+ 1121  ./pypresso Ferrofluid_part3.py
+ 1122  cd espresso_easy_axis/build/
+ 1123  cmake ..
+ 1124  cd Espresso_4_2_2/espresso/build/
+ 1125  make
+ 1126  ./pypresso Ferrofluid_part3.py
+ 1127  make
+ 1128  ./pypresso Ferrofluid_part3.py
+ 1129  make
+ 1130  ./pypresso Ferrofluid_part3.py
+ 1131  make
+ 1132  ./pypresso Ferrofluid_part3.py
+ 1133  make
+ 1134  ./pypresso Ferrofluid_part3.py
+ 1135  make
+ 1136  ./pypresso Ferrofluid_part3.py
+ 1137  make
+ 1138  ./pypresso Ferrofluid_part3.py
+ 1139  make
+ 1140  ./pypresso Ferrofluid_part3.py
+ 1141  make
+ 1142  ./pypresso Ferrofluid_part3.py
+ 1143  make
+ 1144  ./pypresso Ferrofluid_part3.py
+ 1145  make
+ 1146  ./pypresso Ferrofluid_part3.py
+ 1147  make
+ 1148  cd Espresso_4_2_2/espresso/build/
+ 1149  make
+ 1150  ./pypresso Ferrofluid_part3.py
+ 1151  make
+ 1152  ./pypresso Ferrofluid_part3.py
+ 1153  make
+ 1154  make clean
+ 1155  make
+ 1156  ./pypresso Ferrofluid_part3.py
+ 1157  make
+ 1158  ./pypresso Ferrofluid_part3.py
+ 1159  make
+ 1160  ./pypresso Ferrofluid_part3.py
+ 1161  make
+ 1162  cd Espresso_4_2_2/espresso/build/
+ 1163  make
+ 1164  ./pypresso Ferrofluid_part3.py
+ 1165  make
+ 1166  ./pypresso Ferrofluid_part3.py
+ 1167  make
+ 1168  ./pypresso Ferrofluid_part3.py
+ 1169  make
+ 1170  ./pypresso Ferrofluid_part3.py
+ 1171  make
+ 1172  make clean
+ 1173  make
+ 1174  ./pypresso Ferrofluid_part3.py
+ 1175  make
+ 1176  ./pypresso Ferrofluid_part3.py
+ 1177  make
+ 1178  ./pypresso Ferrofluid_part3.py
+ 1179  make
+ 1180  ./pypresso Ferrofluid_part3.py
+ 1181  make
+ 1182  ./pypresso Ferrofluid_part3.py
+ 1183  make
+ 1184  ./pypresso Ferrofluid_part3.py
+ 1185  make
+ 1186  ./pypresso Ferrofluid_part3.py
+ 1187  make
+ 1188  ./pypresso Ferrofluid_part3.py
+ 1189  make
+ 1190  ./pypresso Ferrofluid_part3.py
+ 1191  make
+ 1192  ./pypresso Ferrofluid_part3.py
+ 1193  make
+ 1194  ./pypresso Ferrofluid_part3.py
+ 1195  make
+ 1196  ./pypresso Ferrofluid_part3.py
+ 1197  make
+ 1198  ./pypresso Ferrofluid_part3.py
+ 1199  make
+ 1200  ./pypresso Ferrofluid_part3.py
+ 1201  make
+ 1202  ./pypresso Ferrofluid_part3.py
+ 1203  make
+ 1204  ./pypresso Ferrofluid_part3.py
+ 1205  make
+ 1206  ./pypresso Ferrofluid_part3.py
+ 1207  make clean
+ 1208  make
+ 1209  ./pypresso Ferrofluid_part3.py
+ 1210  make
+ 1211  ./pypresso Ferrofluid_part3.py
+ 1212  make
+ 1213  ./pypresso Ferrofluid_part3.py
+ 1214  make
+ 1215  ./pypresso Ferrofluid_part3.py
+ 1216  make
+ 1217  ./pypresso Ferrofluid_part3.py
+ 1218  make
+ 1219  ./pypresso Ferrofluid_part3.py
+ 1220  make
+ 1221  ./pypresso Ferrofluid_part3.py
+ 1222  cd Espresso_4_2_2/espresso/build/
+ 1223  ./pypresso Ferrofluid_part3.py
+ 1224  make
+ 1225  ./pypresso Ferrofluid_part3.py
+ 1226  make
+ 1227  ./pypresso Ferrofluid_part3.py
+ 1228  make
+ 1229  ./pypresso Ferrofluid_part3.py
+ 1230  make
+ 1231  ./pypresso Ferrofluid_part3.py
+ 1232  make
+ 1233  ./pypresso Ferrofluid_part3.py
+ 1234  cmake ..
+ 1235  make
+ 1236  make clean
+ 1237  make
+ 1238  ./pypresso Ferrofluid_part3.py
+ 1239  make
+ 1240  ./pypresso Ferrofluid_part3.py
+ 1241  make
+ 1242  ./pypresso Ferrofluid_part3.py
+ 1243  make
+ 1244  ./pypresso Ferrofluid_part3.py
+ 1245  make
+ 1246  ./pypresso Ferrofluid_part3.py
+ 1247  make
+ 1248  ./pypresso Ferrofluid_part3.py
+ 1249  make
+ 1250  ./pypresso Ferrofluid_part3.py
+ 1251  make
+ 1252  ./pypresso Ferrofluid_part3.py
+ 1253  make
+ 1254  ./pypresso Ferrofluid_part3.py
+ 1255  make clean
+ 1256  make
+ 1257  ./pypresso Ferrofluid_part3.py
+ 1258  make
+ 1259  ./pypresso Ferrofluid_part3.py
+ 1260  make
+ 1261  ./pypresso Ferrofluid_part3.py
+ 1262  make
+ 1263  ./pypresso Ferrofluid_part3.py
+ 1264  make
+ 1265  ./pypresso Ferrofluid_part3.py
+ 1266  make
+ 1267  ./pypresso Ferrofluid_part3.py
+ 1268  make
+ 1269  ./pypresso Ferrofluid_part3.py
+ 1270  make сдуфт
+ 1271  make clean
+ 1272  make
+ 1273  ./pypresso Ferrofluid_part3.py
+ 1274  make
+ 1275  ./pypresso Ferrofluid_part3.py
+ 1276  make
+ 1277  ./pypresso Ferrofluid_part3.py
+ 1278  make
+ 1279  ./pypresso Ferrofluid_part3.py
+ 1280  cd Espresso_4_2_2/
+ 1281  ls
+ 1282  cd espresso/build/
+ 1283  ./pypresso Ferrofluid_part3.py
+ 1284  cd espresso/build/
+ 1285  make
+ 1286  ./pypresso Ferrofluid_part3.py
+ 1287  make
+ 1288  ./pypresso Ferrofluid_part3.py
+ 1289  make
+ 1290  ./pypresso Ferrofluid_part3.py
+ 1291  make
+ 1292  ./pypresso Ferrofluid_part3.py
+ 1293  make
+ 1294  ./pypresso Ferrofluid_part3.py
+ 1295  make
+ 1296  ./pypresso Ferrofluid_part3.py
+ 1297  make
+ 1298  ./pypresso Ferrofluid_part3.py
+ 1299  make
+ 1300  ./pypresso Ferrofluid_part3.py
+ 1301  make
+ 1302  ./pypresso Ferrofluid_part3.py
+ 1303  make
+ 1304  ./pypresso Ferrofluid_part3.py
+ 1305  make
+ 1306  ./pypresso Ferrofluid_part3.py
+ 1307  make
+ 1308  ./pypresso Ferrofluid_part3.py
+ 1309  make
+ 1310  ./pypresso Ferrofluid_part3.py
+ 1311  make
+ 1312  ./pypresso Ferrofluid_part3.py
+ 1313  cd Espresso_4_2_2/espresso/build/
+ 1314  ./pypresso Ferrofluid_part3.py
+ 1315  cd Espresso_4_2_2/espresso/build/
+ 1316  makke
+ 1317  make
+ 1318  make clean
+ 1319  make
+ 1320  cmake ..
+ 1321  make
+ 1322  ./pypresso Ferrofluid_part3.py
+ 1323  make
+ 1324  ./pypresso Ferrofluid_part3.py
+ 1325  make
+ 1326  ./pypresso Ferrofluid_part3.py
+ 1327  make
+ 1328  ./pypresso Ferrofluid_part3.py
+ 1329  make
+ 1330  ./pypresso Ferrofluid_part3.py
+ 1331  make
+ 1332  ./pypresso Ferrofluid_part3.py
+ 1333  make
+ 1334  ./pypresso Ferrofluid_part3.py
+ 1335  make
+ 1336  ./pypresso Ferrofluid_part3.py
+ 1337  make
+ 1338  ./pypresso Ferrofluid_part3.py
+ 1339  make
+ 1340  ./pypresso Ferrofluid_part3.py
+ 1341  make
+ 1342  ./pypresso Ferrofluid_part3.py
+ 1343  make
+ 1344  ./pypresso Ferrofluid_part3.py
+ 1345  make
+ 1346  ./pypresso Ferrofluid_part3.py
+ 1347  make
+ 1348  ./pypresso Ferrofluid_part3.py
+ 1349  make
+ 1350  ./pypresso Ferrofluid_part3.py
+ 1351  make
+ 1352  ./pypresso Ferrofluid_part3.py
+ 1353  make
+ 1354  ./pypresso Ferrofluid_part3.py
+ 1355  make
+ 1356  ./pypresso Ferrofluid_part3.py
+ 1357  make
+ 1358  ./pypresso Ferrofluid_part3.py
+ 1359  make
+ 1360  ./pypresso Ferrofluid_part3.py
+ 1361  make
+ 1362  ./pypresso Ferrofluid_part3.py
+ 1363  make
+ 1364  ./pypresso Ferrofluid_part3.py
+ 1365  make
+ 1366  ./pypresso Ferrofluid_part3.py
+ 1367  make
+ 1368  ./pypresso Ferrofluid_part3.py
+ 1369  make
+ 1370  ./pypresso Ferrofluid_part3.py
+ 1371  make
+ 1372  ./pypresso Ferrofluid_part3.py
+ 1373  make
+ 1374  ./pypresso Ferrofluid_part3.py
+ 1375  make
+ 1376  ./pypresso Ferrofluid_part3.py
+ 1377  make
+ 1378  cmake ..
+ 1379  make clean
+ 1380  make
+ 1381  ./pypresso Ferrofluid_part3.py
+ 1382  make
+ 1383  ./pypresso Ferrofluid_part3.py
+ 1384  make
+ 1385  ./pypresso Ferrofluid_part3.py
+ 1386  make
+ 1387  ./pypresso Ferrofluid_part3.py
+ 1388  make
+ 1389  ./pypresso Ferrofluid_part3.py
+ 1390  make
+ 1391  ./pypresso Ferrofluid_part3.py
+ 1392  make
+ 1393  ./pypresso Ferrofluid_part3.py
+ 1394  make
+ 1395  ./pypresso Ferrofluid_part3.py
+ 1396  make
+ 1397  ./pypresso Ferrofluid_part3.py
+ 1398  make
+ 1399  ./pypresso Ferrofluid_part3.py
+ 1400  make
+ 1401  ./pypresso Ferrofluid_part3.py
+ 1402  make
+ 1403  ./pypresso Ferrofluid_part3.py
+ 1404  cd Espresso_4_2_2/espresso/build/
+ 1405  make
+ 1406  ./pypresso Ferrofluid_part3.py
+ 1407  make
+ 1408  ./pypresso Ferrofluid_part3.py
+ 1409  make
+ 1410  ./pypresso Ferrofluid_part3.py
+ 1411  make
+ 1412  ./pypresso Ferrofluid_part3.py
+ 1413  make
+ 1414  ./pypresso Ferrofluid_part3.py
+ 1415  make
+ 1416  ./pypresso Ferrofluid_part3.py
+ 1417  make
+ 1418  ./pypresso Ferrofluid_part3.py
+ 1419  make
+ 1420  ./pypresso Ferrofluid_part3.py
+ 1421  make
+ 1422  ./pypresso Ferrofluid_part3.py
+ 1423  make
+ 1424  ./pypresso Ferrofluid_part3.py
+ 1425  make
+ 1426  ./pypresso Ferrofluid_part3.py
+ 1427  make
+ 1428  ./pypresso Ferrofluid_part3.py
+ 1429  make
+ 1430  ./pypresso Ferrofluid_part3.py
+ 1431  make
+ 1432  ./pypresso Ferrofluid_part3.py
+ 1433  make
+ 1434  ./pypresso Ferrofluid_part3.py
+ 1435  make
+ 1436  ./pypresso Ferrofluid_part3.py
+ 1437  make
+ 1438  ./pypresso Ferrofluid_part3.py
+ 1439  make
+ 1440  ./pypresso Ferrofluid_part3.py
+ 1441  make
+ 1442  ./pypresso Ferrofluid_part3.py
+ 1443  make
+ 1444  ./pypresso Ferrofluid_part3.py
+ 1445  make
+ 1446  ./pypresso Ferrofluid_part3.py
+ 1447  make
+ 1448  ./pypresso Ferrofluid_part3.py
+ 1449  make
+ 1450  ./pypresso Ferrofluid_part3.py
+ 1451  make
+ 1452  ./pypresso Ferrofluid_part3.py
+ 1453  make
+ 1454  ./pypresso Ferrofluid_part3.py
+ 1455  make
+ 1456  ./pypresso Ferrofluid_part3.py
+ 1457  cd Espresso_4_2_2/espresso/build/
+ 1458  ./pypresso Ferrofluid_part3.py
+ 1459  cd Espresso_4_2_2/espresso/build/
+ 1460  make
+ 1461  ./pypresso Ferrofluid_part3.py
+ 1462  make
+ 1463  ./pypresso Ferrofluid_part3.py
+ 1464  make
+ 1465  ./pypresso Ferrofluid_part3.py
+ 1466  make
+ 1467  ./pypresso Ferrofluid_part3.py
+ 1468  make
+ 1469  ./pypresso Ferrofluid_part3.py
+ 1470  make
+ 1471  ./pypresso Ferrofluid_part3.py
+ 1472  make
+ 1473  ./pypresso Ferrofluid_part3.py
+ 1474  make
+ 1475  ./pypresso Ferrofluid_part3.py
+ 1476  make
+ 1477  ./pypresso Ferrofluid_part3.py
+ 1478  make
+ 1479  ./pypresso Ferrofluid_part3.py
+ 1480  make
+ 1481  ./pypresso Ferrofluid_part3.py
+ 1482  make
+ 1483  ./pypresso Ferrofluid_part3.py
+ 1484  make
+ 1485  ./pypresso Ferrofluid_part3.py
+ 1486  make
+ 1487  ./pypresso Ferrofluid_part3.py
+ 1488  make
+ 1489  ./pypresso Ferrofluid_part3.py
+ 1490  make
+ 1491  ./pypresso Ferrofluid_part3.py
+ 1492  make
+ 1493  ./pypresso Ferrofluid_part3.py
+ 1494  make
+ 1495  ./pypresso Ferrofluid_part3.py
+ 1496  make
+ 1497  ./pypresso Ferrofluid_part3.py
+ 1498  code 
+ 1499  ./pypresso Ferrofluid_part3.py
+ 1500  vi
+ 1501  vi mm_file.txt 
+ 1502  ./pypresso Ferrofluid_part3.py
+ 1503  vi mm_file.txt 
+ 1504  ./pypresso Ferrofluid_part3.py
+ 1505  vi mm_file.txt 
+ 1506  ./pypresso Ferrofluid_part3.py
+ 1507  vi mm_file.txt 
+ 1508  ./pypresso Ferrofluid_part3.py
+ 1509  vi mm_file.txt 
+ 1510  ./pypresso Ferrofluid_part3.py
+ 1511  vi mm_file.txt 
+ 1512  python
+ 1513  python3
+ 1514  vi plot_mm_file.py
+ 1515  python3 plot_mm_file.py 
+ 1516  vi plot_mm_file.py
+ 1517  python3 plot_mm_file.py 
+ 1518  vi plot_mm_file.py
+ 1519  python3 plot_mm_file.py 
+ 1520  vi plot_mm_file.py
+ 1521  python3 plot_mm_file.py 
+ 1522  vi plot_mm_file.py
+ 1523  python3 plot_mm_file.py 
+ 1524  vi plot_mm_file.py
+ 1525  python3 plot_mm_file.py 
+ 1526  vi plot_mm_file.py
+ 1527  python3 plot_mm_file.py 
+ 1528  vi plot_mm_file.py
+ 1529  python3 plot_mm_file.py 
+ 1530  vi plot_mm_file.py
+ 1531  python3 plot_mm_file.py 
+ 1532  vi plot_mm_file.py
+ 1533  python3 plot_mm_file.py 
+ 1534  ./pypresso Ferrofluid_part3.py
+ 1535  make
+ 1536  ./pypresso Ferrofluid_part3.py
+ 1537  make
+ 1538  ./pypresso Ferrofluid_part3.py
+ 1539  make
+ 1540  ./pypresso Ferrofluid_part3.py
+ 1541  make
+ 1542  ./pypresso Ferrofluid_part3.py
+ 1543  make
+ 1544  ./pypresso Ferrofluid_part3.py
+ 1545  make
+ 1546  ./pypresso Ferrofluid_part3.py
+ 1547  make
+ 1548  ./pypresso Ferrofluid_part3.py
+ 1549  make
+ 1550  ./pypresso Ferrofluid_part3.py
+ 1551  make
+ 1552  ./pypresso Ferrofluid_part3.py
+ 1553  make
+ 1554  ./pypresso Ferrofluid_part3.py
+ 1555  make
+ 1556  ./pypresso Ferrofluid_part3.py
+ 1557  make
+ 1558  ./pypresso Ferrofluid_part3.py
+ 1559  make
+ 1560  ./pypresso Ferrofluid_part3.py
+ 1561  // Макрос для Microsoft Word, который переставляет местами фамилию и имя в каждой строке.
+ 1562  // Если в строке ровно два слова, макрос меняет их порядок.
+ 1563  // Если выделенный текст отсутствует, макрос работает по всему документу.
+ 1564  Sub SwapLastNameAndFirstName()
+ 1565  End Sub
+ 1566  [A
+ 1567  make
+ 1568  ./pypresso Ferrofluid_part3.py
+ 1569  cd Espresso_4_2_2/espresso/b
+ 1570  cd Espresso_4_2_2/espresso/build/
+ 1571  ./pypresso Ferrofluid_part3.py
+ 1572  cd Espresso_4_2_2/espresso/build/
+ 1573  ./pypresso Ferrofluid_part3.py
+ 1574  make
+ 1575  ./pypresso Ferrofluid_part3.py
+ 1576  make
+ 1577  ./pypresso Ferrofluid_part3.py
+ 1578  make
+ 1579  ./pypresso Ferrofluid_part3.py
+ 1580  make
+ 1581  ./pypresso Ferrofluid_part3.py
+ 1582  make
+ 1583  ./pypresso Ferrofluid_part3.py
+ 1584  make
+ 1585  ./pypresso Ferrofluid_part3.py
+ 1586  make
+ 1587  ./pypresso Ferrofluid_part3.py
+ 1588  make
+ 1589  ./pypresso Ferrofluid_part3.py
+ 1590  make
+ 1591  ./pypresso Ferrofluid_part3.py
+ 1592  make
+ 1593  ./pypresso Ferrofluid_part3.py
+ 1594  make
+ 1595  ./pypresso Ferrofluid_part3.py
+ 1596  make
+ 1597  ./pypresso Ferrofluid_part3.py
+ 1598  make
+ 1599  ./pypresso Ferrofluid_part3.py
+ 1600  make
+ 1601  ./pypresso Ferrofluid_part3.py
+ 1602  make
+ 1603  ./pypresso Ferrofluid_part3.py
+ 1604  make
+ 1605  ./pypresso Ferrofluid_part3.py
+ 1606  make
+ 1607  ./pypresso Ferrofluid_part3.py
+ 1608  make
+ 1609  ./pypresso Ferrofluid_part3.py
+ 1610  make
+ 1611  ./pypresso Ferrofluid_part3.py
+ 1612  make
+ 1613  ./pypresso Ferrofluid_part3.py
+ 1614  make
+ 1615  ./pypresso Ferrofluid_part3.py
+ 1616  make
+ 1617  ./pypresso Ferrofluid_part3.py
+ 1618  make
+ 1619  ./pypresso Ferrofluid_part3.py
+ 1620  make
+ 1621  ./pypresso Ferrofluid_part3.py
+ 1622  make
+ 1623  ./pypresso Ferrofluid_part3.py
+ 1624  cd Espresso_4_2_2/espresso/build/
+ 1625  ./pypresso Ferrofluid_part3.py
+ 1626  cd Espresso_4_2_2/espresso/build/
+ 1627  ./pypresso Ferrofluid_part3.py
+ 1628  cd Espresso_4_2_2/espresso/build/
+ 1629  ./pypresso Ferrofluid_part3.py
+ 1630  ./pypresso Ferrofluid_part3.pyexit
+ 1631  ./pypresso Ferrofluid_part3.py
+ 1632  make
+ 1633  ./pypresso Ferrofluid_part3.py
+ 1634  make
+ 1635  ./pypresso Ferrofluid_part3.py
+ 1636  make
+ 1637  ./pypresso Ferrofluid_part3.py
+ 1638  make
+ 1639  ./pypresso Ferrofluid_part3.py
+ 1640  make
+ 1641  ./pypresso Ferrofluid_part3.py
+ 1642  make
+ 1643  ./pypresso Ferrofluid_part3.py
+ 1644  make
+ 1645  ./pypresso Ferrofluid_part3.py
+ 1646  make
+ 1647  ./pypresso Ferrofluid_part3.py
+ 1648  make
+ 1649  ./pypresso Ferrofluid_part3.py
+ 1650  make
+ 1651  ./pypresso Ferrofluid_part3.py
+ 1652  make
+ 1653  ./pypresso Ferrofluid_part3.py
+ 1654  make
+ 1655  ./pypresso Ferrofluid_part3.py
+ 1656  make
+ 1657  ./pypresso Ferrofluid_part3.py
+ 1658  make
+ 1659  ./pypresso Ferrofluid_part3.py
+ 1660  make
+ 1661  ./pypresso Ferrofluid_part3.py
+ 1662  make
+ 1663  ./pypresso Ferrofluid_part3.py
+ 1664  make
+ 1665  ./pypresso Ferrofluid_part3.py
+ 1666  make
+ 1667  make clean
+ 1668  make
+ 1669  cd Espresso_4_2_2/espresso/build/
+ 1670  make
+ 1671  ./pypresso Ferrofluid_part3.py
+ 1672  make
+ 1673  ./pypresso Ferrofluid_part3.py
+ 1674  make
+ 1675  ./pypresso Ferrofluid_part3.py
+ 1676  make
+ 1677  ./pypresso Ferrofluid_part3.py
+ 1678  make
+ 1679  ./pypresso Ferrofluid_part3.py
+ 1680  make
+ 1681  ./pypresso Ferrofluid_part3.py
+ 1682  make
+ 1683  ./pypresso Ferrofluid_part3.py
+ 1684  make
+ 1685  ./pypresso Ferrofluid_part3.py
+ 1686  make
+ 1687  ./pypresso Ferrofluid_part3.py
+ 1688  make
+ 1689  ./pypresso Ferrofluid_part3.py
+ 1690  make
+ 1691  ./pypresso Ferrofluid_part3.py
+ 1692  make
+ 1693  ./pypresso Ferrofluid_part3.py
+ 1694  make
+ 1695  ./pypresso Ferrofluid_part3.py
+ 1696  make
+ 1697  ./pypresso Ferrofluid_part3.py
+ 1698  cd Espresso_4_2_2/espresso/build/
+ 1699  ./pypresso Ferrofluid_part3.py
+ 1700  cd Espresso_4_2_2/espresso/build/
+ 1701  make
+ 1702  ./pypresso Ferrofluid_part3.py
+ 1703  make
+ 1704  ./pypresso Ferrofluid_part3.py
+ 1705  make
+ 1706  ./pypresso Ferrofluid_part3.py
+ 1707  make
+ 1708  ./pypresso Ferrofluid_part3.py
+ 1709  cd Espresso_4_2_2/espresso/build/
+ 1710  ./pypresso Ferrofluid_part3.py
+ 1711  make
+ 1712  ./pypresso Ferrofluid_part3.py
+ 1713  make
+ 1714  ./pypresso Ferrofluid_part3.py
+ 1715  cd Espresso_4_2_2/espresso/build/
+ 1716  ./pypresso Ferrofluid_part3.py
+ 1717  cd Espresso_4_2_2/espresso/build/
+ 1718  ./pypresso Ferrofluid_part3.py
+ 1719  make
+ 1720  ./pypresso Ferrofluid_part3.py
+ 1721  make
+ 1722  ./pypresso Ferrofluid_part3.py
+ 1723  make
+ 1724  ./pypresso Ferrofluid_part3.py
+ 1725  make
+ 1726  ./pypresso Ferrofluid_part3.py
+ 1727  make
+ 1728  ./pypresso Ferrofluid_part3.py
+ 1729  make
+ 1730  ./pypresso Ferrofluid_part3.py
+ 1731  cd Espresso_4_2_2/espresso/build/
+ 1732  make
+ 1733  ./pypresso Ferrofluid_part3.py
+ 1734  make
+ 1735  ./pypresso Ferrofluid_part3.py
+ 1736  make
+ 1737  ./pypresso Ferrofluid_part3.py
+ 1738  make
+ 1739  ./pypresso Ferrofluid_part3.py
+ 1740  make
+ 1741  ./pypresso Ferrofluid_part3.py
+ 1742  make
+ 1743  ./pypresso Ferrofluid_part3.py
+ 1744  make
+ 1745  ./pypresso Ferrofluid_part3.py
+ 1746  make
+ 1747  ./pypresso Ferrofluid_part3.py
+ 1748  make
+ 1749  ./pypresso Ferrofluid_part3.py
+ 1750  make
+ 1751  ./pypresso Ferrofluid_part3.py
+ 1752  make
+ 1753  ./pypresso Ferrofluid_part3.py
+ 1754  cd Espresso_4_2_2/espresso/build/
+ 1755  make
+ 1756  ./pypresso Ferrofluid_part3.py
+ 1757  make
+ 1758  ./pypresso Ferrofluid_part3.py
+ 1759  make
+ 1760  ./pypresso Ferrofluid_part3.py
+ 1761  make
+ 1762  ./pypresso Ferrofluid_part3.py
+ 1763  make
+ 1764  ./pypresso Ferrofluid_part3.py
+ 1765  make
+ 1766  ./pypresso Ferrofluid_part3.py
+ 1767  make
+ 1768  ./pypresso Ferrofluid_part3.py
+ 1769  make
+ 1770  ./pypresso Ferrofluid_part3.py
+ 1771  make
+ 1772  ./pypresso Ferrofluid_part3.py
+ 1773  make
+ 1774  ./pypresso Ferrofluid_part3.py
+ 1775  make
+ 1776  ./pypresso Ferrofluid_part3.py
+ 1777  make
+ 1778  ./pypresso Ferrofluid_part3.py
+ 1779  cd Espresso_4_2_2/espresso/build/
+ 1780  ./pypresso Ferrofluid_part3.py
+ 1781  make
+ 1782  ./pypresso Ferrofluid_part3.py
+ 1783  make
+ 1784  ./pypresso Ferrofluid_part3.py
+ 1785  make
+ 1786  ./pypresso Ferrofluid_part3.py
+ 1787  make
+ 1788  ./pypresso Ferrofluid_part3.py
+ 1789  make
+ 1790  ./pypresso Ferrofluid_part3.py
+ 1791  make
+ 1792  ./pypresso Ferrofluid_part3.py
+ 1793  cd Espresso_4_2_2/espresso/build/
+ 1794  ./pypresso Ferrofluid_part3.py
+ 1795  make
+ 1796  ./pypresso Ferrofluid_part3.py
+ 1797  make
+ 1798  cd Espresso_4_2_2/espresso/build/
+ 1799  make
+ 1800  ./pypresso Ferrofluid_part3.py
+ 1801  make
+ 1802  ./pypresso Ferrofluid_part3.py
+ 1803  make
+ 1804  ./pypresso Ferrofluid_part3.py
+ 1805  make
+ 1806  ./pypresso Ferrofluid_part3.py
+ 1807  make
+ 1808  ./pypresso Ferrofluid_part3.py
+ 1809  cd Espresso_4_2_2/espresso/build/
+ 1810  ls
+ 1811  ./pypresso Ferrofluid
+ 1812  ./pypresso Ferrofluid_part3.py
+ 1813  ./pypresso Ferrofluid.py 
+ 1814  make
+ 1815  ./pypresso Ferrofluid.py 
+ 1816  make
+ 1817  ./pypresso Ferrofluid.py 
+ 1818  make
+ 1819  ./pypresso Ferrofluid.py 
+ 1820  make
+ 1821  ./pypresso Ferrofluid.py 
+ 1822  make
+ 1823  ./pypresso Ferrofluid.py 
+ 1824  make clean
+ 1825  cmake ..
+ 1826  make
+ 1827  ./pypresso Ferrofluid.py 
+ 1828  make
+ 1829  ./pypresso Ferrofluid.py 
+ 1830  cd Espresso_4_2_2/espresso/build/
+ 1831  make
+ 1832  ./pypresso Ferrofluid.py 
+ 1833  make
+ 1834  cd Espresso_4_2_2/espresso/build/
+ 1835  make
+ 1836  ./pypresso Ferrofluid.py 
+ 1837  cd Espresso_4_2_2/espresso/build/
+ 1838  ./pypresso Ferrofluid.py 
+ 1839  make
+ 1840  ./pypresso Ferrofluid.py 
+ 1841  make
+ 1842  ./pypresso Ferrofluid.py 
+ 1843  make
+ 1844  ./pypresso Ferrofluid.py 
+ 1845  make
+ 1846  ./pypresso Ferrofluid.py 
+ 1847  make
+ 1848  ./pypresso Ferrofluid.py 
+ 1849  make
+ 1850  ./pypresso Ferrofluid.py 
+ 1851  cd Espresso_4_2_2/espresso/build/
+ 1852  ./pypresso Ferrofluid_part3.py 
+ 1853  cd Espresso_4_2_2/espresso/build/
+ 1854  make
+ 1855  ./pypresso Ferrofluid_part3.py 
+ 1856  make
+ 1857  ./pypresso Ferrofluid_part3.py 
+ 1858  make
+ 1859  ./pypresso Ferrofluid.py
+ 1860  make
+ 1861  ./pypresso Ferrofluid.py
+ 1862  make
+ 1863  ./pypresso Ferrofluid.py
+ 1864  make
+ 1865  ./pypresso Ferrofluid.py
+ 1866  make
+ 1867  ./pypresso Ferrofluid.py
+ 1868  make
+ 1869  ./pypresso Ferrofluid.py
+ 1870  make
+ 1871  make clean
+ 1872  make
+ 1873  make clean
+ 1874  make
+ 1875  ./pypresso Ferrofluid_part3.py
+ 1876  make
+ 1877  ./pypresso Ferrofluid_part3.py
+ 1878  make
+ 1879  ./pypresso Ferrofluid_part3.py
+ 1880  cd Espresso_4_2_2/espresso/build/
+ 1881  ./pypresso Ferrofluid_part3.py
+ 1882  make
+ 1883  ./pypresso Ferrofluid_part3.py
+ 1884  cd Espresso_4_2_2/espresso/build/
+ 1885  ./pypresso Ferrofluid_part3.py
+ 1886  make
+ 1887  ./pypresso Ferrofluid_part3.py
+ 1888  make
+ 1889  ./pypresso Ferrofluid_part3.py
+ 1890  make
+ 1891  ./pypresso Ferrofluid_part3.py
+ 1892  make
+ 1893  ./pypresso Ferrofluid_part3.py
+ 1894  make
+ 1895  ./pypresso Ferrofluid_part3.py
+ 1896  make
+ 1897  ./pypresso Ferrofluid_part3.py
+ 1898  make
+ 1899  ./pypresso Ferrofluid_part3.py
+ 1900  make
+ 1901  ./pypresso Ferrofluid_part3.py
+ 1902  make
+ 1903  ./pypresso Ferrofluid_part3.py
+ 1904  make
+ 1905  ./pypresso Ferrofluid_part3.py
+ 1906  make
+ 1907  ./pypresso Ferrofluid_part3.py
+ 1908  make
+ 1909  ./pypresso Ferrofluid_part3.py
+ 1910  make
+ 1911  ./pypresso Ferrofluid_part3.py
+ 1912  make
+ 1913  ./pypresso Ferrofluid_part3.py
+ 1914  make
+ 1915  ./pypresso Ferrofluid_part3.py
+ 1916  make
+ 1917  ./pypresso Ferrofluid_part3.py
+ 1918  make
+ 1919  ./pypresso Ferrofluid_part3.py
+ 1920  make
+ 1921  ./pypresso Ferrofluid_part3.py
+ 1922  make
+ 1923  ./pypresso Ferrofluid_part3.py
+ 1924  make
+ 1925  ./pypresso Ferrofluid_part3.py
+ 1926  make
+ 1927  ./pypresso Ferrofluid_part3.py
+ 1928  make
+ 1929  ./pypresso Ferrofluid_part3.py
+ 1930  make
+ 1931  ./pypresso Ferrofluid_part3.py
+ 1932  make
+ 1933  ./pypresso Ferrofluid_part3.py
+ 1934  make
+ 1935  ./pypresso Ferrofluid_part3.py
+ 1936  make
+ 1937  ./pypresso Ferrofluid_part3.py
+ 1938  make
+ 1939  ./pypresso Ferrofluid_part3.py
+ 1940  make
+ 1941  ./pypresso Ferrofluid_part3.py
+ 1942  make
+ 1943  ./pypresso Ferrofluid_part3.py
+ 1944  make
+ 1945  ./pypresso Ferrofluid_part3.py
+ 1946  make
+ 1947  ./pypresso Ferrofluid_part3.py
+ 1948  make
+ 1949  ./pypresso Ferrofluid_part3.py
+ 1950  make
+ 1951  ./pypresso Ferrofluid_part3.py
+ 1952  make
+ 1953  ./pypresso Ferrofluid_part3.py
+ 1954  make
+ 1955  ./pypresso Ferrofluid_part3.py
+ 1956  make
+ 1957  ./pypresso Ferrofluid_part3.py
+ 1958  ls
+ 1959  mkdir Espresso_simp
+ 1960  cd Espresso_simp/
+ 1961  tar xvf espresso-4.2.2.tar.gz 
+ 1962  ls
+ 1963  cd espresso/
+ 1964  mkdir build
+ 1965  cd build/
+ 1966  cmake ..
+ 1967  make
+ 1968  ./pypresso Ferrofluid_part3.py
+ 1969  cd ..
+ 1970  ls
+ 1971  cd Espresso_4_2_2/espresso/build/
+ 1972  make
+ 1973  ./pypresso Ferrofluid_part3.py
+ 1974  make
+ 1975  ./pypresso Ferrofluid_part3.py
+ 1976  make
+ 1977  ./pypresso Ferrofluid_part3.py
+ 1978  make
+ 1979  ./pypresso Ferrofluid_part3.py
+ 1980  make
+ 1981  ./pypresso Ferrofluid_part3.py
+ 1982  cd Espresso_4_2_2/espresso/build/
+ 1983  make
+ 1984  ./pypresso Ferrofluid_part3.py
+ 1985  make
+ 1986  ./pypresso Ferrofluid_part3.py
+ 1987  make
+ 1988  ./pypresso Ferrofluid_part3.py
+ 1989  make
+ 1990  ./pypresso Ferrofluid_part3.py
+ 1991  make
+ 1992  ./pypresso Ferrofluid_part3.py
+ 1993  make
+ 1994  ./pypresso Ferrofluid_part3.py
+ 1995  cd Espresso_simp/espresso/build/
+ 1996  ./pypresso Ferrofluid_part3.py
+ 1997  history
+ 1998  history > history_for_print.txt
+ 1999  cd workgit/
+ 2000  ls
+ 2001  history > history_for_print.txt
