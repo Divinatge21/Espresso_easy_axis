@@ -152,7 +152,7 @@ void propagate_omega_quat_particle(Particle &p, double time_step) {
 
 
 
-  Utils::Quaternion<double> delta_dir_quat = p.quat();
+  Utils::Quaternion<double> delta_dir_quat;
   p.delta_dir_quat() =  time_step * (Qd + time_step_half * Qdd) - lambda * p.quat();
   //fprintf(stderr, "delta_dir_quat = (%.6f, %.6f, %.6f, %.6f)\n", 
     //delta_dir_quat[0], delta_dir_quat[1], delta_dir_quat[2], delta_dir_quat[3]);

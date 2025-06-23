@@ -475,9 +475,7 @@ void set_particle_dipm(int part, double dipm) {
 
 void set_particle_dip(int part, Utils::Vector3d const &dip) {
   Utils::Quaternion<double> quat_dip;
-  
-
-  double dipm = sqrt(dip[0] * dip[0] + dip[1] * dip[1] + dip[2] * dip[2]);
+  double dipm;
   std::tie(quat_dip, dipm) = convert_dip_to_quat(dip);
 
   //fprintf(stderr, "Dip_quat = (%.3f, %.3f, %.3f, %.3f)\n", 
